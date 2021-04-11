@@ -551,7 +551,7 @@ public abstract class ByteBuffer
     /**
      * Relative <i>get</i> method.  Reads the byte at this buffer's
      * current position, and then increments the position.
-     *
+     * 读取 byte
      * @return  The byte at the buffer's current position
      *
      * @throws  BufferUnderflowException
@@ -561,7 +561,7 @@ public abstract class ByteBuffer
 
     /**
      * Relative <i>put</i> method&nbsp;&nbsp;<i>(optional operation)</i>.
-     *
+     * 写入 byte
      * <p> Writes the given byte into this buffer at the current
      * position, and then increments the position. </p>
      *
@@ -581,7 +581,7 @@ public abstract class ByteBuffer
     /**
      * Absolute <i>get</i> method.  Reads the byte at the given
      * index.
-     *
+     * 读取 byte
      * @param  index
      *         The index from which the byte will be read
      *
@@ -608,7 +608,7 @@ public abstract class ByteBuffer
 
     /**
      * Absolute <i>put</i> method&nbsp;&nbsp;<i>(optional operation)</i>.
-     *
+     * 写入 byte
      * <p> Writes the given byte into this buffer at the given
      * index. </p>
      *
@@ -633,8 +633,8 @@ public abstract class ByteBuffer
     // -- Bulk get operations --
 
     /**
-     * Relative bulk <i>get</i> method.
-     *
+     * Relative bulk <i>get</i> method.  相对批量get方法。
+     * 写入 byte 数组
      * <p> This method transfers bytes from this buffer into the given
      * destination array.  If there are fewer bytes remaining in the
      * buffer than are required to satisfy the request, that is, if
@@ -774,7 +774,7 @@ public abstract class ByteBuffer
 
     /**
      * Relative bulk <i>put</i> method&nbsp;&nbsp;<i>(optional operation)</i>.
-     *
+     * 写入 byte 数组
      * <p> This method transfers bytes into this buffer from the given
      * source array.  If there are more bytes to be copied from the array
      * than remain in this buffer, that is, if

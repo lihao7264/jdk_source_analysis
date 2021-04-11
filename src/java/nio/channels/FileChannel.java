@@ -706,7 +706,7 @@ public abstract class FileChannel
      *
      * @return  The number of bytes read, possibly zero, or <tt>-1</tt> if the
      *          given position is greater than or equal to the file's current
-     *          size
+     *          size 返回从 Channel 中写入到 Buffer 的数据大小
      *
      * @throws  IllegalArgumentException
      *          If the position is negative

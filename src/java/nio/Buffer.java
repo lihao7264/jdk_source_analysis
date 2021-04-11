@@ -302,18 +302,18 @@ public abstract class Buffer {
     }
 
     /**
-     * Sets this buffer's mark at its position.
+     * Sets this buffer's mark at its position.  保存当前的 position 到 mark 中
      *
      * @return  This buffer
      */
     public final Buffer mark() {
-        mark = position;
+        mark = position; // 保存当前的 position 到 mark 中
         return this;
     }
 
     /**
      * Resets this buffer's position to the previously-marked position.
-     *
+     * 恢复当前的 position 为 mark
      * <p> Invoking this method neither changes nor discards the mark's
      * value. </p>
      *
@@ -326,14 +326,14 @@ public abstract class Buffer {
         int m = mark;
         if (m < 0)
             throw new InvalidMarkException();
-        position = m;
+        position = m; // 恢复当前的 position 为 mark
         return this;
     }
 
     /**
      * Clears this buffer.  The position is set to zero, the limit is set to
-     * the capacity, and the mark is discarded.
-     *
+     * the capacity, and the mark is discarded.  清除此缓冲区。位置设置为零，限制设置为容量，并且标记被丢弃。
+     * 也就是“重置” Buffer 的数据，因此可以重新读取和写入 Buffer（Buffer的数据实际并未清理掉）
      * <p> Invoke this method before using a sequence of channel-read or
      * <i>put</i> operations to fill this buffer.  For example:
      *
@@ -348,9 +348,9 @@ public abstract class Buffer {
      * @return  This buffer
      */
     public final Buffer clear() {
-        position = 0;
-        limit = capacity;
-        mark = -1;
+        position = 0; // 重置 position
+        limit = capacity; // 恢复 limit 为 capacity
+        mark = -1; // 清空 mark
         return this;
     }
 
@@ -358,7 +358,7 @@ public abstract class Buffer {
      * Flips this buffer.  The limit is set to the current position and then
      * the position is set to zero.  If the mark is defined then it is
      * discarded.
-     *
+     * 从写模式切换到读模式
      * <p> After a sequence of channel-read or <i>put</i> operations, invoke
      * this method to prepare for a sequence of channel-write or relative
      * <i>get</i> operations.  For example:
@@ -376,15 +376,15 @@ public abstract class Buffer {
      * @return  This buffer
      */
     public final Buffer flip() {
-        limit = position;
-        position = 0;
-        mark = -1;
+        limit = position;  // 设置读取上限
+        position = 0;  // 重置 position
+        mark = -1;  // 清空 mark
         return this;
     }
 
     /**
      * Rewinds this buffer.  The position is set to zero and the mark is
-     * discarded.
+     * discarded. 倒带此缓冲区。位置设置为零，标记被丢弃。
      *
      * <p> Invoke this method before a sequence of channel-write or <i>get</i>
      * operations, assuming that the limit has already been set
@@ -398,8 +398,8 @@ public abstract class Buffer {
      * @return  This buffer
      */
     public final Buffer rewind() {
-        position = 0;
-        mark = -1;
+        position = 0; //重置 position 的值为 0
+        mark = -1;  // 清空 mark
         return this;
     }
 

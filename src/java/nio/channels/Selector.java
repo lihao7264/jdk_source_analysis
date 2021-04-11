@@ -32,7 +32,7 @@ import java.util.Set;
 
 
 /**
- * A multiplexor of {@link SelectableChannel} objects.
+ * A multiplexor of {@link SelectableChannel} objects.  {@link SelectableChannel}对象的多路复用器。
  *
  * <p> A selector may be created by invoking the {@link #open open} method of
  * this class, which will use the system's default {@link
@@ -212,7 +212,7 @@ public abstract class Selector implements Closeable {
 
     /**
      * Opens a selector.
-     *
+     * 打开一个选择器。（多路复用器）
      * <p> The new selector is created by invoking the {@link
      * SelectorProvider#openSelector openSelector} method
      * of the system-wide default {@link
@@ -229,21 +229,21 @@ public abstract class Selector implements Closeable {
 
     /**
      * Tells whether or not this selector is open.
-     *
+     * 查询此多路复用器是否打开。
      * @return <tt>true</tt> if, and only if, this selector is open
      */
     public abstract boolean isOpen();
 
     /**
      * Returns the provider that created this channel.
-     *
+     * 返回创建此通道的提供程序。
      * @return  The provider that created this channel
      */
     public abstract SelectorProvider provider();
 
     /**
      * Returns this selector's key set.
-     *
+     * 返回此选择器的键集。
      * <p> The key set is not directly modifiable.  A key is removed only after
      * it has been cancelled and its channel has been deregistered.  Any
      * attempt to modify the key set will cause an {@link
@@ -260,7 +260,7 @@ public abstract class Selector implements Closeable {
 
     /**
      * Returns this selector's selected-key set.
-     *
+     * 返回此选择器的选择键集。
      * <p> Keys may be removed from, but not directly added to, the
      * selected-key set.  Any attempt to add an object to the key set will
      * cause an {@link UnsupportedOperationException} to be thrown.
@@ -277,7 +277,7 @@ public abstract class Selector implements Closeable {
     /**
      * Selects a set of keys whose corresponding channels are ready for I/O
      * operations.
-     *
+     * 返回当前有感兴趣事件准备就绪的 Channel 数量，和 `#select()` 方法不同，立即返回数量，而不阻塞。（选择一组键，其相应的通道已准备好进行I / O操作。）
      * <p> This method performs a non-blocking <a href="#selop">selection
      * operation</a>.  If no channels have become selectable since the previous
      * selection operation then this method immediately returns zero.
@@ -299,7 +299,7 @@ public abstract class Selector implements Closeable {
     /**
      * Selects a set of keys whose corresponding channels are ready for I/O
      * operations.
-     *
+     * 返回当前有感兴趣事件准备就绪的 Channel 数量，在 `#select()` 方法的基础上，增加超时机制。
      * <p> This method performs a blocking <a href="#selop">selection
      * operation</a>.  It returns only after at least one channel is selected,
      * this selector's {@link #wakeup wakeup} method is invoked, the current
@@ -332,7 +332,7 @@ public abstract class Selector implements Closeable {
     /**
      * Selects a set of keys whose corresponding channels are ready for I/O
      * operations.
-     *
+     * 返回当前有感兴趣事件准备就绪的 Channel 数量，阻塞到至少有一个 Channel 在你注册的事件上就绪了。
      * <p> This method performs a blocking <a href="#selop">selection
      * operation</a>.  It returns only after at least one channel is selected,
      * this selector's {@link #wakeup wakeup} method is invoked, or the current

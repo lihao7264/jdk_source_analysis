@@ -31,8 +31,8 @@ import java.io.IOException;
 
 /**
  * A token representing the registration of a {@link SelectableChannel} with a
- * {@link Selector}.
- *
+ * {@link Selector}. 表示一个 Channel 和一个 Selector 的注册关系
+ * 表示{@link SelectableChannel}向{@link Selector}注册的令牌。
  * <p> A selection key is created each time a channel is registered with a
  * selector.  A key remains valid until it is <i>cancelled</i> by invoking its
  * {@link #cancel cancel} method, by closing its channel, or by closing its
@@ -120,7 +120,7 @@ public abstract class SelectionKey {
     /**
      * Returns the channel for which this key was created.  This method will
      * continue to return the channel even after the key is cancelled.
-     *
+     * 返回为其创建此键的通道。即使取消了键，此方法也将继续返回通道。
      * @return  This key's channel
      */
     public abstract SelectableChannel channel();
@@ -128,7 +128,7 @@ public abstract class SelectionKey {
     /**
      * Returns the selector for which this key was created.  This method will
      * continue to return the selector even after the key is cancelled.
-     *
+     * 返回为其创建此键的选择器。即使取消了键，此方法也将继续返回选择器
      * @return  This key's selector
      */
     public abstract Selector selector();
@@ -164,7 +164,7 @@ public abstract class SelectionKey {
 
     /**
      * Retrieves this key's interest set.
-     *
+     * 返回当前key的 感兴趣的事件集合。（interest set ）
      * <p> It is guaranteed that the returned set will only contain operation
      * bits that are valid for this key's channel.
      *
@@ -180,13 +180,13 @@ public abstract class SelectionKey {
 
     /**
      * Sets this key's interest set to the given value.
-     *
+     * 将此键的感兴趣的事件集合设置为给定值。
      * <p> This method may be invoked at any time.  Whether or not it blocks,
      * and for how long, is implementation-dependent.  </p>
      *
-     * @param  ops  The new interest set
+     * @param  ops  The new interest set 新的感兴趣的事件集合
      *
-     * @return  This selection key
+     * @return  This selection key 当前键
      *
      * @throws  IllegalArgumentException
      *          If a bit in the set does not correspond to an operation that
@@ -200,7 +200,7 @@ public abstract class SelectionKey {
 
     /**
      * Retrieves this key's ready-operation set.
-     *
+     * 当前键 就绪的事件集合。
      * <p> It is guaranteed that the returned set will only contain operation
      * bits that are valid for this key's channel.  </p>
      *
@@ -216,7 +216,7 @@ public abstract class SelectionKey {
 
     /**
      * Operation-set bit for read operations.
-     *
+     * 读操作的操作设置位。（1）
      * <p> Suppose that a selection key's interest set contains
      * <tt>OP_READ</tt> at the start of a <a
      * href="Selector.html#selop">selection operation</a>.  If the selector
@@ -229,7 +229,7 @@ public abstract class SelectionKey {
 
     /**
      * Operation-set bit for write operations.
-     *
+     * 写操作的操作设置位。（4）
      * <p> Suppose that a selection key's interest set contains
      * <tt>OP_WRITE</tt> at the start of a <a
      * href="Selector.html#selop">selection operation</a>.  If the selector
@@ -242,7 +242,7 @@ public abstract class SelectionKey {
 
     /**
      * Operation-set bit for socket-connect operations.
-     *
+     * 套接字连接操作的操作设置位。（8）
      * <p> Suppose that a selection key's interest set contains
      * <tt>OP_CONNECT</tt> at the start of a <a
      * href="Selector.html#selop">selection operation</a>.  If the selector
@@ -255,7 +255,7 @@ public abstract class SelectionKey {
 
     /**
      * Operation-set bit for socket-accept operations.
-     *
+     * 套接字接受操作的操作设置位。（16）
      * <p> Suppose that a selection key's interest set contains
      * <tt>OP_ACCEPT</tt> at the start of a <a
      * href="Selector.html#selop">selection operation</a>.  If the selector
@@ -268,7 +268,7 @@ public abstract class SelectionKey {
 
     /**
      * Tests whether this key's channel is ready for reading.
-     *
+     *  测试此键的通道是否已准备好读取。
      * <p> An invocation of this method of the form <tt>k.isReadable()</tt>
      * behaves in exactly the same way as the expression
      *
@@ -291,7 +291,7 @@ public abstract class SelectionKey {
 
     /**
      * Tests whether this key's channel is ready for writing.
-     *
+     * 测试此键的通道是否已准备好进行写入。
      * <p> An invocation of this method of the form <tt>k.isWritable()</tt>
      * behaves in exactly the same way as the expression
      *
@@ -315,7 +315,7 @@ public abstract class SelectionKey {
     /**
      * Tests whether this key's channel has either finished, or failed to
      * finish, its socket-connection operation.
-     *
+     * 测试此键的通道是否 已完成其套接字连接操作 或 未能完成其套接字连接操作。
      * <p> An invocation of this method of the form <tt>k.isConnectable()</tt>
      * behaves in exactly the same way as the expression
      *
@@ -339,7 +339,7 @@ public abstract class SelectionKey {
     /**
      * Tests whether this key's channel is ready to accept a new socket
      * connection.
-     *
+     * 测试此键的通道是否已准备好接受新的套接字连接。
      * <p> An invocation of this method of the form <tt>k.isAcceptable()</tt>
      * behaves in exactly the same way as the expression
      *
@@ -362,7 +362,7 @@ public abstract class SelectionKey {
 
 
     // -- Attachments --
-
+    // 可选的附加对象。
     private volatile Object attachment = null;
 
     private static final AtomicReferenceFieldUpdater<SelectionKey,Object>
@@ -372,7 +372,7 @@ public abstract class SelectionKey {
 
     /**
      * Attaches the given object to this key.
-     *
+     * 将给定的对象附加到此键。（可选的附加对象。）
      * <p> An attached object may later be retrieved via the {@link #attachment()
      * attachment} method.  Only one object may be attached at a time; invoking
      * this method causes any previous attachment to be discarded.  The current
@@ -390,7 +390,7 @@ public abstract class SelectionKey {
 
     /**
      * Retrieves the current attachment.
-     *
+     * 查询可选的附加对象。
      * @return  The object currently attached to this key,
      *          or <tt>null</tt> if there is no attachment
      */

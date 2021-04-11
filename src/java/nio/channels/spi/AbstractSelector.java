@@ -95,7 +95,7 @@ public abstract class AbstractSelector
 
     /**
      * Closes this selector.
-     *
+     * 关闭此选择器。（多路复用器）
      * <p> If the selector has already been closed then this method returns
      * immediately.  Otherwise it marks the selector as closed and then invokes
      * the {@link #implCloseSelector implCloseSelector} method in order to
@@ -105,10 +105,10 @@ public abstract class AbstractSelector
      *          If an I/O error occurs
      */
     public final void close() throws IOException {
-        boolean open = selectorOpen.getAndSet(false);
-        if (!open)
+        boolean open = selectorOpen.getAndSet(false); // 当前多路复用器是否打开
+        if (!open) // 未打开的，则直接返回（不用进行重复关闭了）
             return;
-        implCloseSelector();
+        implCloseSelector(); // 关闭多路复用器
     }
 
     /**

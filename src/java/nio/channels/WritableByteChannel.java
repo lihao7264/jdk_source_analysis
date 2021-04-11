@@ -30,7 +30,7 @@ import java.nio.ByteBuffer;
 
 
 /**
- * A channel that can write bytes.
+ * A channel that can write bytes.  可以写入字节的通道。
  *
  * <p> Only one write operation upon a writable channel may be in progress at
  * any given time.  If one thread initiates a write operation upon a channel
@@ -79,7 +79,7 @@ public interface WritableByteChannel
      * @param  src
      *         The buffer from which bytes are to be retrieved
      *
-     * @return The number of bytes written, possibly zero
+     * @return The number of bytes written, possibly zero  返回向 Channel 中写入 Buffer 的数据大小
      *
      * @throws  NonWritableChannelException
      *          If this channel was not opened for writing
