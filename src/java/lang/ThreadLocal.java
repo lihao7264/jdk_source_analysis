@@ -72,7 +72,7 @@ import java.util.function.Supplier;
  * @since   1.2
  */
 public class ThreadLocal<T> {
-    /**
+    /** ThreadLocals 依赖于附加到每个线程（Thread.threadLocals 和inheritableThreadLocals）的每线程线性探针哈希映射。 ThreadLocal 对象充当键，通过 threadLocalHashCode 进行搜索。这是一个自定义哈希代码（仅在 ThreadLocalMaps 中有用），它消除了在相同线程使用连续构造的 ThreadLocals 的常见情况下的冲突，同时在不太常见的情况下保持良好行为。
      * ThreadLocals rely on per-thread linear-probe hash maps attached
      * to each thread (Thread.threadLocals and
      * inheritableThreadLocals).  The ThreadLocal objects act as keys,
@@ -84,7 +84,7 @@ public class ThreadLocal<T> {
      */
     private final int threadLocalHashCode = nextHashCode();
 
-    /**
+    /** 给出的下一个哈希码。（从零开始，原子更新）
      * The next hash code to be given out. Updated atomically. Starts at
      * zero.
      */
@@ -305,9 +305,9 @@ public class ThreadLocal<T> {
          * entry can be expunged from table.  Such entries are referred to
          * as "stale entries" in the code that follows.
          */
-        static class Entry extends WeakReference<ThreadLocal<?>> {
+        static class Entry extends WeakReference<ThreadLocal<?>> { // 弱引用的 ThreadLocal 作为 Key
             /** The value associated with this ThreadLocal. */
-            Object value;
+            Object value; // 强引用Value（导致内存泄漏的点：Thread Ref->Thread->ThreadLocalMap->Entry->value）
 
             Entry(ThreadLocal<?> k, Object v) {
                 super(k);
@@ -315,23 +315,23 @@ public class ThreadLocal<T> {
             }
         }
 
-        /**
+        /** 初始容量（必须是 2 的幂。）
          * The initial capacity -- MUST be a power of two.
          */
         private static final int INITIAL_CAPACITY = 16;
 
-        /**
+        /** ThreadLocalMap使用开放地址法保存Entry（table.length 必须始终是 2 的幂。）
          * The table, resized as necessary.
          * table.length MUST always be a power of two.
          */
         private Entry[] table;
 
-        /**
+        /** 表中的数量
          * The number of entries in the table.
          */
         private int size = 0;
 
-        /**
+        /** 要调整大小的阈值。（len * 2 / 3）
          * The next size value at which to resize.
          */
         private int threshold; // Default to 0
