@@ -372,10 +372,10 @@ public class HashMap<K,V> extends AbstractMap<K,V>
                 ((Comparable)k).compareTo(x));
     }
 
-    /**
+    /** 返回给定目标容量的二次幂。（InternalThreadLocalMap使用也是这个逻辑）
      * Returns a power of two size for the given target capacity.
      */
-    static final int tableSizeFor(int cap) {
+    static final int tableSizeFor(int cap) {//
         int n = cap - 1;
         n |= n >>> 1;
         n |= n >>> 2;
